@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>OLAP Cube Explorer</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<header class="top">
+  <div>
+    <h1>OLAP Cube Explorer</h1>
+    <p>Roll-up · Drill-down · Slice · Dice · Pivot on the OdiMart sales cube</p>
+  </div>
+  <div class="who">Rudra Prasad Rath<br><span>Roll No. 202456115 · AIML-A · DWDM Project</span></div>
+</header>
+
+<main class="layout">
+  <aside class="controls">
+
+    <section class="card">
+      <h2>Guided examples</h2>
+      <div class="presets">
+        <button data-act="preset" data-p="base">Base view</button>
+        <button data-act="preset" data-p="rollup">Roll-up</button>
+        <button data-act="preset" data-p="drilldown">Drill-down</button>
+        <button data-act="preset" data-p="slice">Slice</button>
+        <button data-act="preset" data-p="dice">Dice</button>
+        <button data-act="preset" data-p="pivot">Pivot</button>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Pivot <small>choose and swap axes</small></h2>
+      <div class="axis"><label>Rows</label><select id="rowsDim" data-axis="rows"></select></div>
+      <div class="axis"><label>Columns</label><select id="colsDim" data-axis="cols"></select></div>
+      <button class="wide" data-act="swap">⇄ Pivot (swap rows and columns)</button>
+    </section>
+
+    <section class="card">
+      <h2>Roll-up / Drill-down <small>move along a hierarchy</small></h2>
+      <div id="levelBox"></div>
+    </section>
+
+    <section class="card">
+      <h2>Slice / Dice <small>pick values to keep</small></h2>
+      <p class="hint">One value on one column = <b>slice</b>. Several values or several columns = <b>dice</b>.</p>
+      <div id="filterBox"></div>
+      <button class="wide ghost" data-act="clear">Clear filters</button>
+    </section>
+  </aside>
+
+  <section class="results">
+    <div class="card">
+      <div class="badges" id="badges"></div>
+      <div class="tablewrap" id="tableBox"></div>
+      <p class="foot" id="foot"></p>
+    </div>
+
+    <div class="card">
+      <div class="tabs">
+        <button class="on" data-act="tab" data-t="pandas">pandas</button>
+        <button data-act="tab" data-t="sql">SQL</button>
+        <button data-act="tab" data-t="log">Operation log</button>
+        <button data-act="tab" data-t="facts">Fact table</button>
+      </div>
+      <pre id="codeBox" class="code"></pre>
+      <div id="factsBox" class="tablewrap facts" hidden></div>
+    </div>
+  </section>
+</main>
+
+<script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
